@@ -1,0 +1,65 @@
+---
+title: "learning dplyr"
+output: html_notebook
+---
+
+# Intro 
+
+In this R tutorial we learn about dplyr and ggplot
+
+The data set is originally from here: https://packages.revolutionanalytics.com/datasets/
+
+First we load the necessary libraries:
+```{r, echo=FALSE}
+library(tidyverse)
+```
+
+Load the data
+```{r}
+load("~/Downloads/airline_delay/DELAY.rda")
+```
+
+Generate a summary
+```{r}
+summary(DELAY_DATA)
+```
+
+# select
+
+Find distinct years
+```{r}
+DELAY_DATA %>% select(YEAR) %>% distinct()
+```
+
+Find unique months 
+```{r}
+DELAY_DATA %>% select(MONTH) %>% distinct()
+```
+
+Find all distinct carriers
+```{r}
+DELAY_DATA %>% select(UNIQUE_CARRIER) %>% distinct()
+```
+
+Find all columns containing the word delay and only show first five rows
+```{r}
+DELAY_DATA %>% select(contains("DELAY")) %>% head(5)
+```
+
+You can learn more about these helper functions such as "contains" in the cheatsheet
+https://www.r-bloggers.com/the-complete-catalog-of-argument-variations-of-select-in-dplyr/
+
+# filter
+
+filter out only the flights of American Airlines
+DELAY_DATA %>% filter(UNIQUE_CARRIER == "AA") %>% head(5)
+
+#filter out only the flights of American Airlines in February
+DELAY_DATA %>% filter(UNIQUE_CARRIER == "AA" & MONTH == 2) %>% head(5)
+
+#filter flights that of American Airline that have not started from JFK
+DELAY_DATA %>% filter(UNIQUE_CARRIER == "AA" & ORIGIN != JFK) %>% head(5)
+
+#filter flights that have covered a distance of at least 300
+DELAY_DATA %>% filter(DISTANCE >= 300)
+
