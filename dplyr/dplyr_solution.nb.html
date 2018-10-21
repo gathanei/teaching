@@ -188,11 +188,16 @@ $(document).ready(function () {
 <p>Load the data</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG9hZChcIn4vRG93bmxvYWRzL2FpcmxpbmVfZGVsYXkvREVMQVkucmRhXCIpXG5gYGAifQ== -->
-<pre class="r"><code>load(&quot;~/Downloads/airline_delay/DELAY.rda&quot;)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG9hZChcImZsaWdodHMucmRhXCIpXG5cbmBgYCJ9 -->
+<pre class="r"><code>load(&quot;flights.rda&quot;)
+</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiY2Fubm90IG9wZW4gY29tcHJlc3NlZCBmaWxlICdmbGlnaHRzLnJkYScsIHByb2JhYmxlIHJlYXNvbiAnTm8gc3VjaCBmaWxlIG9yIGRpcmVjdG9yeSdFcnJvciBpbiByZWFkQ2hhcihjb24sIDVMLCB1c2VCeXRlcyA9IFRSVUUpIDogY2Fubm90IG9wZW4gdGhlIGNvbm5lY3Rpb25cbiJ9 -->
+<pre><code>cannot open compressed file 'flights.rda', probable reason 'No such file or directory'Error in readChar(con, 5L, useBytes = TRUE) : cannot open the connection</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>alternatively you can also just load the data by double clicking it.</p>
 <p>Generate a summary</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -297,16 +302,16 @@ $(document).ready(function () {
 <p>Find all distinct carriers</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuREVMQVlfREFUQSAlPiUgc2VsZWN0KFVOSVFVRV9DQVJSSUVSKSAlPiUgZGlzdGluY3QoKVxuYGBgIn0= -->
-<pre class="r"><code>DELAY_DATA %&gt;% select(UNIQUE_CARRIER) %&gt;% distinct()</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmxpZ2h0cyAlPiUgc2VsZWN0KFVOSVFVRV9DQVJSSUVSKSAlPiUgZGlzdGluY3QoKVxuYGBgIn0= -->
+<pre class="r"><code>flights %&gt;% select(UNIQUE_CARRIER) %&gt;% distinct()</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Find all columns containing the word delay and only show first five rows</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuREVMQVlfREFUQSAlPiUgc2VsZWN0KGNvbnRhaW5zKFwiREVMQVlcIikpICU+JSBoZWFkKDUpXG5gYGAifQ== -->
-<pre class="r"><code>DELAY_DATA %&gt;% select(contains(&quot;DELAY&quot;)) %&gt;% head(5)</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmxpZ2h0cyAlPiUgc2VsZWN0KGNvbnRhaW5zKFwiREVMQVlcIikpICU+JSBoZWFkKDUpXG5gYGAifQ== -->
+<pre class="r"><code>flights %&gt;% select(contains(&quot;DELAY&quot;)) %&gt;% head(5)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -314,23 +319,46 @@ $(document).ready(function () {
 </div>
 <div id="filter" class="section level1">
 <h1>filter</h1>
-<p>filter out only the flights of American Airlines DELAY_DATA %&gt;% filter(UNIQUE_CARRIER == “AA”) %&gt;% head(5)</p>
+<p>filter out only the flights of American Airlines</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmxpZ2h0cyAlPiUgZmlsdGVyKFVOSVFVRV9DQVJSSUVSID09IFwiQUFcIikgJT4lIGhlYWQoNSlcbmBgYCJ9 -->
+<pre class="r"><code>flights %&gt;% filter(UNIQUE_CARRIER == &quot;AA&quot;) %&gt;% head(5)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>filter out only the flights of American Airlines in February</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmxpZ2h0cyAlPiUgZmlsdGVyKFVOSVFVRV9DQVJSSUVSID09IFwiQUFcIiAmIE1PTlRIID09IDIpICU+JSBoZWFkKDUpXG5gYGAifQ== -->
+<pre class="r"><code>flights %&gt;% filter(UNIQUE_CARRIER == &quot;AA&quot; &amp; MONTH == 2) %&gt;% head(5)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>filter flights that of American Airline that have not started from JFK</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmxpZ2h0cyAlPiUgZmlsdGVyKFVOSVFVRV9DQVJSSUVSID09IFwiQUFcIiAmIE9SSUdJTiAhPSBKRkspICU+JSBoZWFkKDUpXG5gYGAifQ== -->
+<pre class="r"><code>flights %&gt;% filter(UNIQUE_CARRIER == &quot;AA&quot; &amp; ORIGIN != JFK) %&gt;% head(5)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>filter flights that have covered a distance of at least 300</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmxpZ2h0cyAlPiUgZmlsdGVyKERJU1RBTkNFID49IDMwMCkgJT4lIGhlYWQoNSlcbmBgYCJ9 -->
+<pre class="r"><code>flights %&gt;% filter(DISTANCE &gt;= 300) %&gt;% head(5)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 </div>
-<div id="filter-out-only-the-flights-of-american-airlines-in-february" class="section level1">
-<h1>filter out only the flights of American Airlines in February</h1>
-<p>DELAY_DATA %&gt;% filter(UNIQUE_CARRIER == “AA” &amp; MONTH == 2) %&gt;% head(5)</p>
-</div>
-<div id="filter-flights-that-of-american-airline-that-have-not-started-from-jfk" class="section level1">
-<h1>filter flights that of American Airline that have not started from JFK</h1>
-<p>DELAY_DATA %&gt;% filter(UNIQUE_CARRIER == “AA” &amp; ORIGIN != JFK) %&gt;% head(5)</p>
-</div>
-<div id="filter-flights-that-have-covered-a-distance-of-at-least-300" class="section level1">
-<h1>filter flights that have covered a distance of at least 300</h1>
-<p>DELAY_DATA %&gt;% filter(DISTANCE &gt;= 300)</p>
+<div id="arrange" class="section level1">
+<h1>arrange</h1>
+<p>sort flights in</p>
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAibGVhcm5pbmcgZHBseXIiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMgSW50cm8gCgpJbiB0aGlzIFIgdHV0b3JpYWwgd2UgbGVhcm4gYWJvdXQgZHBseXIgYW5kIGdncGxvdAoKVGhlIGRhdGEgc2V0IGlzIG9yaWdpbmFsbHkgZnJvbSBoZXJlOiBodHRwczovL3BhY2thZ2VzLnJldm9sdXRpb25hbmFseXRpY3MuY29tL2RhdGFzZXRzLwoKRmlyc3Qgd2UgbG9hZCB0aGUgbmVjZXNzYXJ5IGxpYnJhcmllczoKYGBge3IsIGVjaG89RkFMU0V9CmxpYnJhcnkodGlkeXZlcnNlKQpgYGAKCkxvYWQgdGhlIGRhdGEKYGBge3J9CmxvYWQoIn4vRG93bmxvYWRzL2FpcmxpbmVfZGVsYXkvREVMQVkucmRhIikKYGBgCgpHZW5lcmF0ZSBhIHN1bW1hcnkKYGBge3J9CnN1bW1hcnkoREVMQVlfREFUQSkKYGBgCgojIHNlbGVjdAoKRmluZCBkaXN0aW5jdCB5ZWFycwpgYGB7cn0KREVMQVlfREFUQSAlPiUgc2VsZWN0KFlFQVIpICU+JSBkaXN0aW5jdCgpCmBgYAoKRmluZCB1bmlxdWUgbW9udGhzIApgYGB7cn0KREVMQVlfREFUQSAlPiUgc2VsZWN0KE1PTlRIKSAlPiUgZGlzdGluY3QoKQpgYGAKCkZpbmQgYWxsIGRpc3RpbmN0IGNhcnJpZXJzCmBgYHtyfQpERUxBWV9EQVRBICU+JSBzZWxlY3QoVU5JUVVFX0NBUlJJRVIpICU+JSBkaXN0aW5jdCgpCmBgYAoKRmluZCBhbGwgY29sdW1ucyBjb250YWluaW5nIHRoZSB3b3JkIGRlbGF5IGFuZCBvbmx5IHNob3cgZmlyc3QgZml2ZSByb3dzCmBgYHtyfQpERUxBWV9EQVRBICU+JSBzZWxlY3QoY29udGFpbnMoIkRFTEFZIikpICU+JSBoZWFkKDUpCmBgYAoKWW91IGNhbiBsZWFybiBtb3JlIGFib3V0IHRoZXNlIGhlbHBlciBmdW5jdGlvbnMgc3VjaCBhcyAiY29udGFpbnMiIGluIHRoZSBjaGVhdHNoZWV0Cmh0dHBzOi8vd3d3LnItYmxvZ2dlcnMuY29tL3RoZS1jb21wbGV0ZS1jYXRhbG9nLW9mLWFyZ3VtZW50LXZhcmlhdGlvbnMtb2Ytc2VsZWN0LWluLWRwbHlyLwoKIyBmaWx0ZXIKCmZpbHRlciBvdXQgb25seSB0aGUgZmxpZ2h0cyBvZiBBbWVyaWNhbiBBaXJsaW5lcwpERUxBWV9EQVRBICU+JSBmaWx0ZXIoVU5JUVVFX0NBUlJJRVIgPT0gIkFBIikgJT4lIGhlYWQoNSkKCiNmaWx0ZXIgb3V0IG9ubHkgdGhlIGZsaWdodHMgb2YgQW1lcmljYW4gQWlybGluZXMgaW4gRmVicnVhcnkKREVMQVlfREFUQSAlPiUgZmlsdGVyKFVOSVFVRV9DQVJSSUVSID09ICJBQSIgJiBNT05USCA9PSAyKSAlPiUgaGVhZCg1KQoKI2ZpbHRlciBmbGlnaHRzIHRoYXQgb2YgQW1lcmljYW4gQWlybGluZSB0aGF0IGhhdmUgbm90IHN0YXJ0ZWQgZnJvbSBKRksKREVMQVlfREFUQSAlPiUgZmlsdGVyKFVOSVFVRV9DQVJSSUVSID09ICJBQSIgJiBPUklHSU4gIT0gSkZLKSAlPiUgaGVhZCg1KQoKI2ZpbHRlciBmbGlnaHRzIHRoYXQgaGF2ZSBjb3ZlcmVkIGEgZGlzdGFuY2Ugb2YgYXQgbGVhc3QgMzAwCkRFTEFZX0RBVEEgJT4lIGZpbHRlcihESVNUQU5DRSA+PSAzMDApCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAibGVhcm5pbmcgZHBseXIiCm91dHB1dDogaHRtbF9ub3RlYm9vawotLS0KCiMgSW50cm8gCgpJbiB0aGlzIFIgdHV0b3JpYWwgd2UgbGVhcm4gYWJvdXQgZHBseXIgYW5kIGdncGxvdAoKVGhlIGRhdGEgc2V0IGlzIG9yaWdpbmFsbHkgZnJvbSBoZXJlOiBodHRwczovL3BhY2thZ2VzLnJldm9sdXRpb25hbmFseXRpY3MuY29tL2RhdGFzZXRzLwoKRmlyc3Qgd2UgbG9hZCB0aGUgbmVjZXNzYXJ5IGxpYnJhcmllczoKYGBge3IsIGVjaG89RkFMU0V9CmxpYnJhcnkodGlkeXZlcnNlKQpgYGAKCkxvYWQgdGhlIGRhdGEKYGBge3J9CmxvYWQoImZsaWdodHMucmRhIikKYGBgCmFsdGVybmF0aXZlbHkgeW91IGNhbiBhbHNvIGp1c3QgbG9hZCB0aGUgZGF0YSBieSBkb3VibGUgY2xpY2tpbmcgaXQuCgpHZW5lcmF0ZSBhIHN1bW1hcnkKYGBge3J9CnN1bW1hcnkoZmxpZ2h0cykKYGBgCgojIHNlbGVjdAoKRmluZCBkaXN0aW5jdCB5ZWFycwpgYGB7cn0KZmxpZ2h0cyAlPiUgc2VsZWN0KFlFQVIpICU+JSBkaXN0aW5jdCgpCmBgYAoKRmluZCB1bmlxdWUgbW9udGhzIApgYGB7cn0KZmxpZ2h0cyAlPiUgc2VsZWN0KE1PTlRIKSAlPiUgZGlzdGluY3QoKQpgYGAKCkZpbmQgYWxsIGRpc3RpbmN0IGNhcnJpZXJzCmBgYHtyfQpmbGlnaHRzICU+JSBzZWxlY3QoVU5JUVVFX0NBUlJJRVIpICU+JSBkaXN0aW5jdCgpCmBgYAoKRmluZCBhbGwgY29sdW1ucyBjb250YWluaW5nIHRoZSB3b3JkIGRlbGF5IGFuZCBvbmx5IHNob3cgZmlyc3QgZml2ZSByb3dzCmBgYHtyfQpmbGlnaHRzICU+JSBzZWxlY3QoY29udGFpbnMoIkRFTEFZIikpICU+JSBoZWFkKDUpCmBgYAoKWW91IGNhbiBsZWFybiBtb3JlIGFib3V0IHRoZXNlIGhlbHBlciBmdW5jdGlvbnMgc3VjaCBhcyAiY29udGFpbnMiIGluIHRoZSBjaGVhdHNoZWV0Cmh0dHBzOi8vd3d3LnItYmxvZ2dlcnMuY29tL3RoZS1jb21wbGV0ZS1jYXRhbG9nLW9mLWFyZ3VtZW50LXZhcmlhdGlvbnMtb2Ytc2VsZWN0LWluLWRwbHlyLwoKIyBmaWx0ZXIKCmZpbHRlciBvdXQgb25seSB0aGUgZmxpZ2h0cyBvZiBBbWVyaWNhbiBBaXJsaW5lcwpgYGB7cn0KZmxpZ2h0cyAlPiUgZmlsdGVyKFVOSVFVRV9DQVJSSUVSID09ICJBQSIpICU+JSBoZWFkKDUpCmBgYAoKZmlsdGVyIG91dCBvbmx5IHRoZSBmbGlnaHRzIG9mIEFtZXJpY2FuIEFpcmxpbmVzIGluIEZlYnJ1YXJ5CmBgYHtyfQpmbGlnaHRzICU+JSBmaWx0ZXIoVU5JUVVFX0NBUlJJRVIgPT0gIkFBIiAmIE1PTlRIID09IDIpICU+JSBoZWFkKDUpCmBgYAoKZmlsdGVyIGZsaWdodHMgdGhhdCBvZiBBbWVyaWNhbiBBaXJsaW5lIHRoYXQgaGF2ZSBub3Qgc3RhcnRlZCBmcm9tIEpGSwpgYGB7cn0KZmxpZ2h0cyAlPiUgZmlsdGVyKFVOSVFVRV9DQVJSSUVSID09ICJBQSIgJiBPUklHSU4gIT0gSkZLKSAlPiUgaGVhZCg1KQpgYGAKCmZpbHRlciBmbGlnaHRzIHRoYXQgaGF2ZSBjb3ZlcmVkIGEgZGlzdGFuY2Ugb2YgYXQgbGVhc3QgMzAwCmBgYHtyfQpmbGlnaHRzICU+JSBmaWx0ZXIoRElTVEFOQ0UgPj0gMzAwKSAlPiUgaGVhZCg1KQpgYGAKCiMgYXJyYW5nZQoKc29ydCBmbGlnaHRzIGluIAoK</div>
 
 
 

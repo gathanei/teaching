@@ -16,34 +16,35 @@ library(tidyverse)
 
 Load the data
 ```{r}
-load("~/Downloads/airline_delay/DELAY.rda")
+load("flights.rda")
 ```
+alternatively you can also just load the data by double clicking it.
 
 Generate a summary
 ```{r}
-summary(DELAY_DATA)
+summary(flights)
 ```
 
 # select
 
 Find distinct years
 ```{r}
-DELAY_DATA %>% select(YEAR) %>% distinct()
+flights %>% select(YEAR) %>% distinct()
 ```
 
 Find unique months 
 ```{r}
-DELAY_DATA %>% select(MONTH) %>% distinct()
+flights %>% select(MONTH) %>% distinct()
 ```
 
 Find all distinct carriers
 ```{r}
-DELAY_DATA %>% select(UNIQUE_CARRIER) %>% distinct()
+flights %>% select(UNIQUE_CARRIER) %>% distinct()
 ```
 
 Find all columns containing the word delay and only show first five rows
 ```{r}
-DELAY_DATA %>% select(contains("DELAY")) %>% head(5)
+flights %>% select(contains("DELAY")) %>% head(5)
 ```
 
 You can learn more about these helper functions such as "contains" in the cheatsheet
@@ -52,14 +53,26 @@ https://www.r-bloggers.com/the-complete-catalog-of-argument-variations-of-select
 # filter
 
 filter out only the flights of American Airlines
-DELAY_DATA %>% filter(UNIQUE_CARRIER == "AA") %>% head(5)
+```{r}
+flights %>% filter(UNIQUE_CARRIER == "AA") %>% head(5)
+```
 
-#filter out only the flights of American Airlines in February
-DELAY_DATA %>% filter(UNIQUE_CARRIER == "AA" & MONTH == 2) %>% head(5)
+filter out only the flights of American Airlines in February
+```{r}
+flights %>% filter(UNIQUE_CARRIER == "AA" & MONTH == 2) %>% head(5)
+```
 
-#filter flights that of American Airline that have not started from JFK
-DELAY_DATA %>% filter(UNIQUE_CARRIER == "AA" & ORIGIN != JFK) %>% head(5)
+filter flights that of American Airline that have not started from JFK
+```{r}
+flights %>% filter(UNIQUE_CARRIER == "AA" & ORIGIN != JFK) %>% head(5)
+```
 
-#filter flights that have covered a distance of at least 300
-DELAY_DATA %>% filter(DISTANCE >= 300)
+filter flights that have covered a distance of at least 300
+```{r}
+flights %>% filter(DISTANCE >= 300) %>% head(5)
+```
+
+# arrange
+
+sort flights in 
 
