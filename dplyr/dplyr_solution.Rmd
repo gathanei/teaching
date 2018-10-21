@@ -74,5 +74,51 @@ flights %>% filter(DISTANCE >= 300) %>% head(5)
 
 # arrange
 
-sort flights in 
+sort flights according to the day of month in ascending order
+```{r}
+flights %>% arrange(DAY_OF_MONTH) %>% head(5)
+```
 
+sort flights according to the day of month and month in ascending order
+```{r}
+flights %>% arrange(DAY_OF_MONTH,MONTH) %>% head(5)
+```
+
+sort flights according to month in descending order
+```{r}
+flights %>% arrange(desc(MONTH)) %>% head(5)
+```
+
+# mutate
+
+Mutations allow us to define new variables
+
+Define a variable delay_per_distance which is defined as the arrival delay over the distance travelled.
+```{r}
+flights %>% mutate(delay_per_distance = ARR_DELAY/DISTANCE) %>% head(5)
+```
+# summarise
+
+compute the mean distance and standard deviation of all flights
+```{r}
+flights %>% summarise(mean_distance = mean(DISTANCE),sd_distance = sd(DISTANCE))
+```
+
+# grouping
+
+Now we learn about grouping. The command group_by(data,A,B) groups data according to the values of A and B. Say A takes values in {0,1} and B={0,1,2} then group_by sets groups according to all possible combinations of these values. If we run a summarise command on a grouped data set we get a statistics for all samples in each group.
+
+Lets compute the average distance per carrier
+```{r}
+flights %>% group_by(UNIQUE_CARRIER) %>% summarise(mean_distance_per_carrier=mean(DISTANCE))
+```
+
+Grouping allows us to run quite complex computations with very short code.
+
+Find the carrier with largest average delay per distance, i.e. delay/distance
+```{r}
+flights %>% mutate(delay_by_distance = ARR_DELAY/DISTANCE) %>%
+  group_by(UNIQUE_CARRIER) %>%
+  summarise(average_del_by_dist = mean(delay_by_distance)) %>%
+  arrange(desc(average_del_by_dist))
+```
